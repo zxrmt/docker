@@ -69,16 +69,11 @@ RUN ln -s /usr/bin/llvm-config-19 /usr/bin/llvm-config
 
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
-RUN echo 'root:$PASS' | chpasswd
+#RUN echo 'root:$PASS' | chpasswd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+#RUN /usr/sbin/sshd -D
 
 RUN /root/.cargo/bin/cargo install bore-cli
-RUN echo -n "tmux new-session -d -s ssh -n master -d \"/usr/sbin/sshd -D\"; tmux new-window -t ssh:1123 -d \"/root/.cargo/bin/bore local 22 --to 45.32.127.181\";bash " > /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-#ENTRYPOINT ["/entrypoint.sh"]
-CMD /entrypoint.sh
-#RUN tmux new-session -d -s ssh -n master -d "/usr/sbin/sshd -D"
-#RUN tmux new-window -d ssh:1 -d "/root/.cargo/bin/bore local 22 --to $HOST"
 
 
 

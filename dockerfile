@@ -36,7 +36,6 @@ RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appi
 RUN chmod u+x nvim.appimage
 RUN ./nvim.appimage --appimage-extract
 RUN ln -s /squashfs-root/AppRun /usr/bin/nvim
-RUN git clone https://github.com/LazyVim/starter ~/.config/nvim
 
 
 

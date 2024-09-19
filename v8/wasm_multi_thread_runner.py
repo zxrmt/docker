@@ -5,17 +5,17 @@ import multiprocessing
 import time
 import sys
 
-FILELIST = glob.glob(sys.argv[1])
+FILELIST = glob.glob(sys.argv[1] + "/*")
 BINARY = "/v8/out/cov/d8"
 COMPILE_DIR = "/v8/out/cov/"
 RUNNER_JS = "/root/zx/wasm_runner.js"
-PWD = os.getcwd() 
+PWD = os.getcwd()
 os.environ["LLVM_PROFILE_FILE"] = "/root/cov.%4m%c.profraw"
 
 def extract_coverage(files):
     processed = 0
     for file_name in files:
-        os.system(f"{BINARY} --experimental-wasm- {RUNNER_JS} -- {file_name} ")
+        os.system(f"{BINARY} {RUNNER_JS} -- {file_name} ")
         processed += 1
         if processed % 10 == 0:
             print(processed, len(files))
@@ -23,7 +23,7 @@ def extract_coverage(files):
 # Create threads to process the files
 size =len(FILELIST)
 print("Total", size)
-step = size / 30
+step = int(size / 30)
 args_list = []
 for i in range(0,size, step):
     x = i
@@ -39,3 +39,4 @@ for arg in args_list:
 # Wait for all processes to finish
 for p in processes:
     p.join()
+    

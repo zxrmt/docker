@@ -8,6 +8,7 @@ import time
 FILELIST = glob.glob(sys.argv[1])
 BINARY = "/v8/out/cov/d8"
 COMPILE_DIR = "/v8/out/cov/"
+RUNNER_JS = "/root/zx/wasm_runner.js"
 PWD = os.getcwd() 
 os.environ["LLVM_PROFILE_FILE"] = "/root/cov.%4m%c.profraw"
 
@@ -15,7 +16,7 @@ def extract_coverage(files):
     for file_name in files:
       
        
-        os.system(f"{BINARY} {file_name}")
+        os.system(f"{BINARY} {RUNNER_JS} -- {file_name} ")
 
 # Create threads to process the files
 size =len(FILELIST)

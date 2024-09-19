@@ -1,2 +1,13 @@
-from ubuntu:lastest
-  
+FROM ubuntu:latest
+SHELL ["/bin/bash", "-c"]
+ENV LC_CTYPE=C.UTF-8
+RUN apt-get -y update
+RUN apt-get -y install git python3 curl python3-pip flex bison vim tmux wget zsh sudo cmake libssl-dev psmisc htop file bat  psmisc
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 100
+
+RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+ENV PATH="/depot_tools:$PATH"
+RUN fetch v8
+WORKDIR /v8
+RUN gclient sync
+

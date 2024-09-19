@@ -11,3 +11,12 @@ RUN fetch v8
 WORKDIR /v8
 RUN gclient sync
 
+
+
+RUN wget https://apt.llvm.org/llvm.sh
+RUN chmod +x llvm.sh
+RUN  ./llvm.sh 20
+
+RUN ln -s /usr/bin/clang-20 /usr/bin/clang
+RUN ln -s /usr/bin/clang++-20 /usr/bin/clang++
+RUN ln -s /usr/bin/llvm-config-20 /usr/bin/llvm-config

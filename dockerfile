@@ -2,7 +2,7 @@ FROM ubuntu:latest
 SHELL ["/bin/bash", "-c"]
 ENV LC_CTYPE=C.UTF-8
 RUN apt-get -y update
-RUN apt-get -y install git python3 curl python3-pip flex bison vim tmux wget gcc zsh sudo cmake libssl-dev psmisc htop file clang llvm bat  psmisc
+RUN apt-get -y install git python3 curl python3-pip flex bison vim tmux wget zsh sudo cmake libssl-dev psmisc htop file bat  psmisc
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 100
 
 

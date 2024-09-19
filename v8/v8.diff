@@ -1,0 +1,21 @@
+diff --git a/src/wasm/function-body-decoder-impl.h b/src/wasm/function-body-decoder-impl.h
+index c0a200d4e3e..4010489518f 100644
+--- a/src/wasm/function-body-decoder-impl.h
++++ b/src/wasm/function-body-decoder-impl.h
+@@ -41,7 +41,7 @@ struct WasmTag;
+     if (v8_flags.trace_wasm_decoder) PrintF(__VA_ARGS__); \
+   } while (false)
+
+-#define TRACE_INST_FORMAT "  @%-8d #%-30s|"
++#define TRACE_INST_FORMAT "  %-8d %-30s|"
+
+ // Return the evaluation of {condition} if {ValidationTag::validate} is true,
+ // DCHECK that it is true and always return true otherwise.
+@@ -3056,7 +3056,7 @@ class WasmFullDecoder : public WasmDecoder<ValidationTag, decoding_mode> {
+       Append(" | ");
+       for (uint32_t i = 0; i < decoder_->stack_.size(); ++i) {
+         Value& val = decoder_->stack_[i];
+-        Append(" %c", val.type.short_name());
++        Append(" %s", val.type.name().c_str());
+       }
+     }

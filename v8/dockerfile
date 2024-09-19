@@ -20,3 +20,6 @@ RUN ln -s /usr/bin/llvm-config-20 /usr/bin/llvm-config
 RUN fetch v8
 WORKDIR /v8
 RUN gclient sync
+# BUILD COV
+RUN gn gen out/cov --args="use_clang_coverage=true is_component_build=false"
+RUN ninja -C out/cov d8

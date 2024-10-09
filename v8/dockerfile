@@ -25,3 +25,4 @@ RUN gn gen out/cov --args="use_clang_coverage=true is_component_build=false"
 RUN ninja -C out/cov d8
 RUN mkdir /root/cov
 ENV LLVM_PROFILE_FILE="/root/cov/cov.%4m%c.profraw"
+WORKDIR /root/
